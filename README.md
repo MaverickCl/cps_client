@@ -1,8 +1,12 @@
-# React + Vite
+# CPS (Control de producción y stocks)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Clonar el repositorio mediante instrucciones de github.
 
-Currently, two official plugins are available:
+Una vez clonado el proyecto en local ejecutar el comando  ` npm i ` o `npm install` con el fin de instalar de manera local los modulos de node para desarrollo
+- nota: se debe temer intalado previamente node.JS en el equipo
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Para correr el servidor local ejecutar el comando `npm run dev`
+
+Requisitos del sistema:
+- node v20.10 o +
+- npm 10.2 o +
