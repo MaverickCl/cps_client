@@ -5,6 +5,7 @@ import Stocks from '../stocks/pages/Stocks'
 import Invoice from '../invoice/pages/Invoice'
 import Finishgood from '../finishgood/Finishgood'
 import Landing from '../Landing/pages/Landing'
+import { Search } from '../search/pages/Search'
 
 
 export const AppRouter = () => {
@@ -24,6 +25,9 @@ export const AppRouter = () => {
 
         {/* Vista de facturacion */}
         <Route path='/invoice/*' element={<Invoice />} />
+
+        {/* Vista de busqueda */}
+        <Route path='/search/*' element={<Search />} />
 
     </Routes>
   )
