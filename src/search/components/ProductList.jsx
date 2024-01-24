@@ -1,71 +1,61 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ProductCard from "./ProductCard";
-import Pagination from './Pagination';
+import Pagination from '../../components/Pagination.jsx';
+import { getAllFinishgood } from '../../api/finishGoodService.js';
+import { useLocation } from 'react-router-dom';
 
-const ProductList=() =>{
-    const [currentPage, setCurrentPage] = useState(0);
-    const itemsPerPage = 3;
-  
-    const productData =[
-        {
-            referencia:'MWD60604',
-            descripcion:'PLACA TMACTE STD USA DUPLX 15A MISTIC BL',
-            estado:'En proceso de facturación',
-        },
-        {
-            referencia:'MWD60604',
-            descripcion:'PLACA TMACTE STD USA DUPLX 15A MISTIC BL',
-            estado:'En proceso de facturación',
-        },
-        {
-          referencia:'MWD60604',
-          descripcion:'PLACA TMACTE STD USA DUPLX 15A MISTIC BL',
-          estado:'En proceso de facturación',
-        },
-        {
-          referencia:'MWD60604',
-          descripcion:'PLACA TMACTE STD USA DUPLX 15A MISTIC BL',
-          estado:'En proceso de facturación',
-        },
-        {
-          referencia:'MWD60604',
-          descripcion:'PLACA TMACTE STD USA DUPLX 15A MISTIC BL',
-          estado:'En proceso de facturación',
-        },
-        {
-            referencia:'MWD60604',
-            descripcion:'PLACA TMACTE STD USA DUPLX 15A MISTIC BL',
-            estado:'En proceso de facturación',
-          },
-          {
-            referencia:'MWD60604',
-            descripcion:'PLACA TMACTE STD USA DUPLX 15A MISTIC BL',
-            estado:'En proceso de facturación',
-          },
-        
-    ]
-    const startIndex = currentPage * itemsPerPage;
-    const selectedProducts = productData.slice(startIndex, startIndex + itemsPerPage);
+const ProductList = () => {
+  const [finishgoods, setFinishgoods] = useState([]);
+  const [currentPage, setCurrentPage] = useState(0);
+  const itemsPerPage = 3;
 
-    return (
-        <div>
-            <div className='space-x-4'>
-                {selectedProducts.map((details, index) => (
-                <ProductCard
-                    key={index}
-                    referencia={details.referencia}
-                    descripcion={details.descripcion}
-                    estado={details.estado}
-                />
-                ))}
-            </div>
-        <Pagination
-            total={productData.length}
-            itemsPerPage={itemsPerPage}
-            currentPage={currentPage}
-            onPageChange={(page) => setCurrentPage(page)}
-        />
-        </div>
+  const location = useLocation(); // Usa useLocation para acceder a la URL actual
+
+  // Extrae el término de búsqueda de la URL
+  const searchQuery = new URLSearchParams(location.search).get('query') || '';
+
+  useEffect(() => {
+      async function loadData() {
+          const res = await getAllFinishgood();
+          setFinishgoods(res.data);
+      }
+      loadData();
+  }, []);
+
+  // Filtra los productos basados en el término de búsqueda cada vez que cambia
+  useEffect(() => {
+      setCurrentPage(0); // Reinicia a la primera página con cada nuevo término de búsqueda
+  }, [searchQuery]);
+
+  const filteredProducts = finishgoods.filter((product) =>
+      product.Referencia.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  const totalFilteredProducts = filteredProducts.length; // Obtener el total de productos filtrados
+
+  const startIndex = currentPage * itemsPerPage;
+  const selectedProducts = filteredProducts.slice(startIndex, startIndex + itemsPerPage);
+
+  return (
+      <div>
+          <div className='space-x-2'>
+              {selectedProducts.map((details, index) => (
+                  <ProductCard
+                      key={index}
+                      Referencia={details.Referencia}
+                      Descripcion={details.Descripcion}
+                      Estado={details.Estado}
+                      Url={details.Url}
+                  />
+              ))}
+          </div>
+          <Pagination
+              total={totalFilteredProducts} // Utilizar el total de productos filtrados
+              itemsPerPage={itemsPerPage}
+              currentPage={currentPage}
+              onPageChange={(page) => setCurrentPage(page)}
+          />
+      </div>
   );
 };
 

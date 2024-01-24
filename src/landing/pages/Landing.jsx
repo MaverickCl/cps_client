@@ -1,14 +1,14 @@
 import React from 'react'
 import Navbar from '../../components/Navbar'
-import CardList from '../components/Card'
 import TableComponent from '../../components/TableComponent'
+import CardList from '../components/CardList'
 
 
 const Landing = () => {
   return (
     <div>
     <Navbar/>
-    <CardList/>
+    <CardList />
     <TableComponent/>
     </div>
   )

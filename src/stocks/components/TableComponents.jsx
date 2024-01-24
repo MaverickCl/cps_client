@@ -9,20 +9,7 @@ const TableComponents = () => {
       stockProveedor: 100,
       necesidad: 1000,
     },
-    {
-        referencia: 'CHZ221012179907',
-        descripcion: 'SUPPORT 3M GEN GREY',
-        stockPlanta: 100,
-        stockProveedor: 100,
-        necesidad: 1000,
-      },
-      {
-        referencia: 'CHZ221012179907',
-        descripcion: 'SUPPORT 3M GEN GREY',
-        stockPlanta: 100,
-        stockProveedor: 100,
-        necesidad: 1000,
-      },
+
     // ... más datos
   ];
 

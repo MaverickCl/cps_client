@@ -4,8 +4,8 @@ import ComponentView from '../component/pages/ComponentView'
 import Stocks from '../stocks/pages/Stocks'
 import Invoice from '../invoice/pages/Invoice'
 import Finishgood from '../finishgood/Finishgood'
-import Landing from '../Landing/pages/Landing'
 import { Search } from '../search/pages/Search'
+import Landing from '../landing/pages/Landing'
 
 
 export const AppRouter = () => {
@@ -18,7 +18,7 @@ export const AppRouter = () => {
         <Route path='/component_view/*' element={<ComponentView />} />
         
         {/* Vista Finish Good */}
-        <Route path='/finish_good/*' element={<Finishgood />} />
+        <Route path='/finish_good/:referencia' element={<Finishgood />} />
         
         {/* Vista de stocks */}
         <Route path='/stocks/*' element={<Stocks />} />

@@ -17,10 +17,12 @@ const Navbar = () => {
     // Función para manejar el cambio en el input de búsqueda
   const onSearchChange = (event) => {
     setSearchTerm(event.target.value);
+    redirectToSearch();
   };
 
    // Función para manejar la pulsación de teclas en el input de búsqueda
   const onSearchKeyPress = (event) => {
+    
     if (event.key === 'Enter') {
       redirectToSearch();
     }
