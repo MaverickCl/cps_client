@@ -1,9 +1,25 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react';
 import Navbar from '../../components/Navbar'
 import ComponentDetailList from '../components/ComponentsDetails'
-import TableComponent from '../../components/TableComponent'
+import { useParams } from 'react-router-dom';
+import { getComponentesByReference } from '../../api/componentesService'
 
 const ComponentView = () => {
+  const { referencia } = useParams(); // Obtiene la referencia de la URL
+  const [componentDetails, setComponentDetails] = useState(null);
+  useEffect(() => {
+    if (referencia) {
+      getComponentesByReference(referencia)
+        .then(response => {
+          setComponentDetails(response.data); // Asume que los datos vienen en response.data
+        })
+        .catch(error => {
+          console.error("Error fetching FinishGood details", error);
+        });
+    }
+  }, [referencia]);
+  const imageUrl = componentDetails?.Url
+  console.log(imageUrl)
   return (
     <div>
       <Navbar/>
@@ -11,11 +27,11 @@ const ComponentView = () => {
         <div className="container">
           <div className="flex">
             <div className="w-1/2">
-              <img src="/CHZ221012179907.png" alt="Producto Imagen" className="img-fluid " style={{ width: '80%' }}/>
+              <img src={imageUrl} alt="Producto Imagen" className="img-fluid " style={{ width: '80%' }}/>
             </div>
             <div className="w-1/2 mt-16">
-              <ComponentDetailList/>
-              <TableComponent />
+              <ComponentDetailList details={componentDetails}/>
+              
             </div>
           </div>
         </div>

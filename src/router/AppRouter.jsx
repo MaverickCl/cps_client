@@ -15,7 +15,7 @@ export const AppRouter = () => {
         <Route path='/*' element={<Landing />} />
         
         {/* Vista componente */}
-        <Route path='/component_view/*' element={<ComponentView />} />
+        <Route path='/component_view/:referencia' element={<ComponentView />} />
         
         {/* Vista Finish Good */}
         <Route path='/finish_good/:referencia' element={<Finishgood />} />

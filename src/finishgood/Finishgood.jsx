@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import Navbar from '../components/Navbar';
-import TableComponent from '../components/TableComponent';
+
 import DetailList from './components/DetailList';
 import { getFinishgoodByReference } from '../api/finishGoodService';
 import { useParams } from 'react-router-dom';
+import BomTable from '../components/BomTable';
+
 
 
 function Finishgood() {
@@ -31,12 +33,13 @@ function Finishgood() {
               <img src={imageUrl} alt="Producto Imagen" className="img-fluid" style={{ width: '80%' }}/>
             </div>
             <div className="w-1/2 mt-16">
-
+              
                {/* Detalle del Finishgood */}
               <DetailList details={finishGoodDetails}/>
-
+              <div className='mt-5'>
               {/* tabla de componentes */}
-              <TableComponent/>
+              <BomTable finishGoodRef={referencia} />
+              </div>
             </div>
           </div>
         </div>

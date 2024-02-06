@@ -2,20 +2,17 @@ import axios from 'axios';
 
 // La URL base de tu API; ajusta esto según tu configuración
 const BASE_URL = 'http://127.0.0.1:8000/cps/api/v1';
-
-// Función para obtener los detalles de un FinishGood por su referencia
-export const getFinishgoodByReference = (reference) => {
-    return axios.get(`${BASE_URL}/finishgood/${reference}/`);
+export const getComponentesByReference = (reference) => {
+    return axios.get(`${BASE_URL}/componente/${reference}/`);
 }
-
 // Función para obtener los datos de FinishGood paginados desde la API
-export const getFinishGoodsPaginated = async (page, itemsPerPage) => {
+export const getComponentesPaginated = async (page, itemsPerPage) => {
     try {
         // Calcula el índice de inicio en función de la página actual
         const startIndex = (page - 1) * itemsPerPage;
 
         // Realiza una solicitud GET a la API para obtener los datos paginados
-        const response = await axios.get(`${BASE_URL}/finishgood/`, {
+        const response = await axios.get(`${BASE_URL}/componente/`, {
             params: {
                 _start: startIndex, // Índice de inicio
                 _limit: itemsPerPage, // Cantidad de elementos por página
@@ -30,6 +27,6 @@ export const getFinishGoodsPaginated = async (page, itemsPerPage) => {
     }
 }
 
-export const getAllFinishgood = () => {
-    return axios.get(`${BASE_URL}/finishgood/`);
+export const getAllComponentes = () => {
+    return axios.get(`${BASE_URL}/componente/`);
 }

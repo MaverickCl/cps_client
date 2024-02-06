@@ -1,12 +1,12 @@
 import React from 'react'
 
-const Details = ({Descripcion, Referencia, Estado, Stock}) => {
+const Details = ({Descripcion, Referencia, Estado, Necesidad}) => {
   return (
     <div>
         <p className='font-bold'>{Descripcion}</p>
         <p className='text-sm text-gray-600'>{Referencia}</p>
         <p className='text-sm text-black-600 mt-2'>Estado: {Estado}</p>
-        <p className='text-sm text-black-600'>Stock: {Stock}</p>
+        <p className='text-sm text-black-600'>Necesidad: {Necesidad}</p>
     </div>
   )
 }
@@ -23,7 +23,9 @@ const DetailList = ({ details }) => {
                 Descripcion={details.Descripcion}
                 Referencia={details.Referencia}
                 Estado={details.Estado}
-                Stock={details.Stock}
+                
+                Necesidad={details.Necesidad}
+                
             />
         </div>
     );

@@ -1,43 +1,37 @@
 import React from 'react'
 
-const Details = ({descripcion, referencia, familia, stock, ubicacion}) => {
+const Details = ({Descripcion, Referencia, Estado, Stock, Necesidad}) => {
   return (
     <div>
-        <p className='font-bold'>{descripcion}</p>
-        <p className='text-sm text-gray-600'>{referencia}</p>
-        <p className='text-sm text-black-600 mt-2'>Familia: {familia}</p>
-        <p className='text-sm text-black-600'>Stock: {stock}</p>
-        <p className='text-sm text-black-600'>Ubicacion: {ubicacion}</p>
+        <p className='font-bold'>{Descripcion}</p>
+        <p className='text-sm text-gray-600'>{Referencia}</p>
+        <p className='text-sm text-black-600 mt-2'>Estado: {Estado}</p>
+        <p className='text-sm text-black-600'>Stock: {Stock}</p>
+        <p className='text-sm text-black-600'>Necesidad: {Necesidad}</p>
     </div>
   )
 }
 
-const ComponentDetailList=() =>{
-    const detailsData =[
-        {
-            descripcion:'SUPPORT 3M GEN GREY',
-            referencia:'CHZ221012179907',
-            familia:'Genesis',
-            ubicacion: 'SB-06-D',
-            stock: '1000',
-        },
-        
-    ]
-    return(
-        <div className='space-x-4'>
-            {detailsData.map((details, index)=>(
-                <Details
-                key={index}
-                descripcion={details.descripcion}
-                referencia={details.referencia}
-                familia={details.familia}
-                stock={details.stock}
-                ubicacion={details.ubicacion}
-                />
-            ))}
+const ComponentDetailList = ({ details }) => {
+    // Verifica si hay detalles disponibles antes de intentar renderizar
+    if (!details) {
+        return <div>Loading...</div>; // o cualquier otro manejo de carga o error
+    }
 
+    return (
+        <div className='space-x-4'>
+            <Details
+                Descripcion={details.Descripcion}
+                Referencia={details.Referencia}
+                Estado={details.Estado}
+                Stock={details.Stock}
+                Necesidad={details.Necesidad}
+                
+            />
         </div>
-    )
+    );
 }
+
+
 
 export default ComponentDetailList;

@@ -16,13 +16,9 @@ const CardList = () => {
                 // y que quieres encontrar los X elementos con mayor necesidad, donde X es un número definido por ti
                 
                   // Calcula la 'diferencia' para cada FinishGood y lo almacena en un nuevo campo
-                  const finishGoodsWithDifference = finishGoods.map(finishGood => ({
-                    ...finishGood,
-                    diferencia: finishGood.Necesidad - finishGood.Stock, // Añade el campo 'diferencia'
-                    
-                  }));
+                  
                 
-                const sortedFinishGoods = finishGoodsWithDifference.sort((a, b) => b.Necesidad - a.Necesidad); // Ordena por Necesidad de mayor a menor
+                const sortedFinishGoods = finishGoods.sort((a, b) => b.Necesidad - a.Necesidad); // Ordena por Necesidad de mayor a menor
                 const topFinishGoods = sortedFinishGoods.slice(0, 3); // Cambia X por el número de elementos que deseas
                 setHighestNeedFinishGoods(topFinishGoods);
             })
@@ -33,13 +29,13 @@ const CardList = () => {
 
 
   return (
-    <div className="flex justify-center items-center space-x-4">
+    <div className="flex justify-center items-center space-x-4 mb-7">
       {highestNeedFinishGoods.map((finishGood , index) => (
         <Card
           key={index}
           Referencia={finishGood.Referencia}
           Estado={finishGood.Estado}
-          Diferencia={finishGood.diferencia}
+          Necesidad={finishGood.Necesidad}
           Url={finishGood.Url}
         />
 

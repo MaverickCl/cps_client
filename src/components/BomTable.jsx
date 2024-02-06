@@ -1,27 +1,24 @@
 import React, { useState, useEffect } from 'react';
-import { getAllComponentes } from '../api/componentesService.js';
+import { getBomByFinishGoodRef } from '../api/bomService'; // Asume la existencia de esta función
 
-const TableComponent = () => {
-    const [componentes, setComponentes] = useState([]);
-    const [HighestNeedComponentes, setHighestNeedComponentes] = useState([]);
+const BomTable = ({ finishGoodRef }) => {
+    const [bomItems, setBomItems] = useState([]);
 
     useEffect(() => {
-        const loadComponentes = async () => {
+        const loadBomItems = async () => {
             try {
-                const response = await getAllComponentes();
-                const data = response.data;
-                setComponentes(data);
-                // Ahora ordenamos y filtramos usando data directamente
-                const sortedComponentes = data.sort((a, b) => b.Necesidad - a.Necesidad);
-                const topComponentes = sortedComponentes.slice(0, 3); // Asume que quieres los 3 componentes de mayor necesidad
-                setHighestNeedComponentes(topComponentes);
+                const response = await getBomByFinishGoodRef(finishGoodRef);
+                setBomItems(response.data);
             } catch (error) {
-                console.error("Error fetching Componentes data", error);
+                console.error("Error fetching BOM data for", finishGoodRef, error);
             }
         };
-        loadComponentes();
-    }, []);
 
+        if (finishGoodRef) {
+            loadBomItems();
+        }
+    }, [finishGoodRef]); // Este efecto se re-ejecuta si cambia finishGoodRef
+    console.log(bomItems)
     return (
         <div className="flex justify-center">
             <div className="flex-col items-center py-2">
@@ -30,13 +27,13 @@ const TableComponent = () => {
                         <thead className="text-xs text-gray-700 uppercase bg-gray-50 border-b">
                             <tr>
                                 <th scope="col" className="py-3 px-6">
-                                    Referencia
+                                    Referencia Componente
                                 </th>
                                 <th scope="col" className="py-3 px-6">
                                     Descripción
                                 </th>
                                 <th scope="col" className="py-3 px-6">
-                                    Stock en planta
+                                    Stock
                                 </th>
                                 <th scope="col" className="py-3 px-6">
                                     Necesidad
@@ -44,10 +41,10 @@ const TableComponent = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {HighestNeedComponentes.map((item, index) => (
+                            {bomItems.map((item, index) => (
                                 <tr key={index} className="bg-white border-b hover:bg-[#B2EBBD] hover:text-black">
                                     <th scope="row" className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap">
-                                        <a href={`/component_view/${item.Referencia}`}>{item.Referencia}</a>
+                                    <a href={`/component_view/${item.Referencia}`}>{item.Referencia}</a>
                                     </th>
                                     <td className="py-4 px-6">
                                         {item.Descripcion}
@@ -68,4 +65,4 @@ const TableComponent = () => {
     );
 };
 
-export default TableComponent;
+export default BomTable;
