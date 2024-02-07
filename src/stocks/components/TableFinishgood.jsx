@@ -39,9 +39,7 @@ const TableFinishgood = () => {
                         <th scope="col" className="py-3 px-6">
                             Descripción
                         </th>
-                        <th scope="col" className="py-3 px-6">
-                            Stock en planta
-                        </th>
+
                         <th scope="col" className="py-3 px-6">
                             Necesidad
                         </th>
@@ -56,9 +54,7 @@ const TableFinishgood = () => {
                             <td className="py-4 px-6">
                                 {item.Descripcion}
                             </td>
-                            <td className="py-4 px-6">
-                                {item.Stock}
-                            </td>
+                            
                             <td className="py-4 px-6">
                                 {item.Necesidad}
                             </td>

@@ -15,12 +15,12 @@ import Navbar from '../../components/Navbar';
 
 // Datos de ejemplo para los gráficos
 const dataVolumeByClient = [
-     { name: 'Mexico', volumenP: 20, meta: 15 },
-     { name: 'Colombia', volumenP: 30, meta: 35 },
-     { name: 'Chile', volumenP: 50, meta: 45 },
-     { name: 'Argentina', volumenP: 10, meta: 20 },
-     { name: 'Peru', volumenP: 40, meta: 30 },
-     { name: 'Brasil', volumenP: 5, meta: 10 }
+     { name: 'Mexico', volumen: 20, meta: 15 },
+     { name: 'Colombia', volumen: 30, meta: 35 },
+     { name: 'Chile', volumen: 50, meta: 45 },
+     { name: 'Argentina', volumen: 10, meta: 20 },
+     { name: 'Peru', volumen: 40, meta: 30 },
+     { name: 'Brasil', volumen: 5, meta: 10 }
    ];
    const dataPerformanceBreakdown = [
     { name: 'Inyección', volumen: 4382, meta: 5879 },
@@ -73,10 +73,10 @@ const Dashboard = () => {
             <YAxis />
             <Tooltip />
             <Legend />
-            <Bar dataKey="volumenP" fill="#10B981" onMouseEnter={(data, index) => handleMouseEnter(index)} onMouseLeave={handleMouseLeave}>
+            <Bar dataKey="volumen" fill="#10B981" onMouseEnter={(data, index) => handleMouseEnter(index)} onMouseLeave={handleMouseLeave}>
               {
                 dataVolumeByClient.map((entry, index) => (
-                  <Cell key={`cell-${index}`} fill={entry.volumenP >= entry.meta ? "#10B981" : "#FF4136"} />
+                  <Cell key={`cell-${index}`} fill={entry.volumen >= entry.meta ? "#10B981" : "#FF4136"} />
                 ))
               }
             </Bar>
